@@ -38,10 +38,14 @@
        <!-- Available jobs article section  -->
       <article class="max-w-7xl mx-auto py-6 px-4 md:px-0 space-y-4 ">
           <h2 class="font-medium text-xl">Available Jobs</h2>
+
+          <!-- All, Interview, Rejected job list  -->
           <div class="space-x-3">
-              <button class="btn btn-neutral btn-outline">All</button>
-              <button class="btn btn-neutral btn-outline">Interview</button>
-              <button class="btn btn-neutral btn-outline">Rejected</button>
+              <button onclick="toggleStyle('all_Filter_Btn')" id="all_Filter_Btn" class="btn btn-outline bg-black text-amber-50">All</button>
+
+              <button onclick="toggleStyle('interview_Filter_Btn')" id="interview_Filter_Btn"  class="btn btn-outline bg-base-100">Interview</button>
+
+              <button onclick="toggleStyle('rejected_Filter_Btn')"  id="rejected_Filter_Btn" class="btn btn-outline bg-base-100">Rejected</button>
           </div>
 
       
@@ -74,14 +78,14 @@
       </article>
 
       <!-- when job data no found  -->
-      <article  class="hidden max-w-7xl mx-auto py-30 px-4 md:px-0 space-y-4 bg-base-100 flex flex-col justify-center items-center rounded-2xl">
+      <article id="no_data_found_section"  class="hidden max-w-7xl mx-auto py-30 px-4 md:px-0 space-y-4 bg-base-100 flex flex-col justify-center items-center rounded-2xl">
           <img src="./jobs.png" alt="">
           <p class="font-bold text-2xl">No jobs available</p>
           <em class="font-stretch-75%">Check back soon for new job opportunities</em>
       </article>
    </main>
 
-   
+
    <!-- job data stored to scripts/jobData.js -->
    <script src="scripts/jobData.js"></script>
 
