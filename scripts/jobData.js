@@ -117,4 +117,4 @@ function getData(){
 }
 
 const result = getData();
-console.log(result)
+// console.log(result)
