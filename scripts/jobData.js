@@ -73,6 +73,48 @@ const jobs = [
   }
 ];
 
-for(const job of jobs){
-    // console.log(job)
+
+function getData(){
+  
+  for(const job of jobs){
+      // console.log(job)
+
+      // step-1 : get parent node 
+    const parentJobContainer = document.querySelector('#job_card_container');
+    //  console.log(parentJobContainer)
+
+    // step-2 : create child section and set innerHtml 
+    const section = document.createElement('section');
+    section.innerHTML= `
+    <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
+                  <div>
+                      <h3 class="font-medium text-lg"> ${job.companyName}</h3>
+                      <p>${job.position}</p>
+                  </div>
+                  <ul class="space-x-4">
+                      <span>${job.location}</span>
+                      <span>${job.type}</span>
+                      <span>${job.salary}</span>
+                  </ul>
+                  <div>
+                      <p class="bg-base-300 inline-block px-4 py-2">Not Applied</p>
+                      <p>${job.description}</p>
+      
+                  </div>
+                  <ul class="space-x-4">
+                      <button class="btn text-success font-medium">Interview</button>
+                      <button class="btn text-error font-medium">Rejected</button>
+                  </ul>
+      
+                  <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
+              </section>
+    
+    
+    `
+    // step-3 : append child
+    parentJobContainer.appendChild(section)
+  }
 }
+
+const result = getData();
+console.log(result)

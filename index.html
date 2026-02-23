@@ -33,46 +33,52 @@
 
    </header>
 
- <!-- Available jobs container section  -->
-<article class="max-w-7xl mx-auto py-6 px-4 md:px-0 space-y-4 ">
-    <h2 class="font-medium text-xl">Available Jobs</h2>
-    <div class="space-x-3">
-        <button class="btn btn-neutral btn-outline">All</button>
-        <button class="btn btn-neutral btn-outline">Interview</button>
-        <button class="btn btn-neutral btn-outline">Rejected</button>
-    </div>
+   <main>
+       <!-- Available jobs article section  -->
+      <article class="max-w-7xl mx-auto py-6 px-4 md:px-0 space-y-4 ">
+          <h2 class="font-medium text-xl">Available Jobs</h2>
+          <div class="space-x-3">
+              <button class="btn btn-neutral btn-outline">All</button>
+              <button class="btn btn-neutral btn-outline">Interview</button>
+              <button class="btn btn-neutral btn-outline">Rejected</button>
+          </div>
+      
+          <!-- jobs card container  -->
+          <div id="job_card_container" class="space-y-4">
 
-    <div>
-        <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
-            <div>
-                <h3 class="font-medium text-lg">TechNova Ltd</h3>
-                <p>Frontend Developer</p>
-            </div>
-            <ul class="space-x-4">
-                <span>Dhaka</span>
-                <span>Full-time</span>
-                <span>40,000 BDT</span>
-            </ul>
-            <div>
-                <p class="bg-base-200 inline-block px-4 py-2">Not Applied</p>
-                <p>Build and maintain modern web applications.</p>
+              <!-- <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
+                  <div>
+                      <h3 class="font-medium text-lg">TechNova Ltd</h3>
+                      <p>Frontend Developer</p>
+                  </div>
+                  <ul class="space-x-4">
+                      <span>Dhaka</span>
+                      <span>Full-time</span>
+                      <span>40,000 BDT</span>
+                  </ul>
+                  <div>
+                      <p class="bg-base-200 inline-block px-4 py-2">Not Applied</p>
+                      <p>Build and maintain modern web applications.</p>
+      
+                  </div>
+                  <ul class="space-x-4">
+                      <button class="btn text-success">interview</button>
+                      <button class="btn text-error">Rejected</button>
+                  </ul>
+      
+                  <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
+              </section> -->
+          </div>
+      </article>
 
-            </div>
-            <ul class="space-x-4">
-                <button class="btn text-success">interview</button>
-                <button class="btn text-error">Rejected</button>
-            </ul>
+      <!-- when job data no found  -->
+      <article  class="hidden max-w-7xl mx-auto py-30 px-4 md:px-0 space-y-4 bg-base-100 flex flex-col justify-center items-center rounded-2xl">
+          <img src="./jobs.png" alt="">
+          <p class="font-bold text-2xl">No jobs available</p>
+          <em class="font-stretch-75%">Check back soon for new job opportunities</em>
+      </article>
+   </main>
 
-            <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
-        </section>
-    </div>
-</article>
-
-<article  class="max-w-7xl mx-auto py-30 px-4 md:px-0 space-y-4 bg-base-100 flex flex-col justify-center items-center rounded-2xl">
-    <img src="./jobs.png" alt="">
-    <p class="font-bold text-2xl">No jobs available</p>
-    <em class="font-stretch-75%">Check back soon for new job opportunities</em>
-</article>
    <script src="scripts/jobData.js"></script>
 </body>
 </html>
