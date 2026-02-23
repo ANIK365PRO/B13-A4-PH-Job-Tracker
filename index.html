@@ -13,7 +13,66 @@
     <!-- font awesome cdn  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
-    <h1>hello job tracer!!!</h1>
+<body class="bg-base-300">
+   <header class="max-w-7xl mx-auto py-6 md:py-10 px-4 md:px-0 space-y-4 border-b border-dashed ">
+    <h1 class="text-2xl lg:text-3xl font-medium lg:font-bold text-center md:text-start">Job Application Tracker</h1>
+    <nav class="grid  md:grid-cols-3 gap-5 md:gap-10 ">
+        <div class="bg-base-100 px-5 py-3 md:p-6 rounded-2xl">
+            <p class="font-bold">Total</p>
+            <em class="font-semibold">0</em>
+        </div>
+        <div class="bg-base-100 px-5 py-3 md:p-6 rounded-2xl">
+            <p class="font-bold">Interview</p>
+            <em class="font-semibold">0</em>
+        </div>
+        <div class="bg-base-100 px-5 py-3 md:p-6 rounded-2xl">
+            <p class="font-bold">Rejected</p>
+            <em class="font-semibold">0</em>
+        </div>
+    </nav>
+
+   </header>
+
+ <!-- Available jobs container section  -->
+<article class="max-w-7xl mx-auto py-6 px-4 md:px-0 space-y-4 ">
+    <h2 class="font-medium text-xl">Available Jobs</h2>
+    <div class="space-x-3">
+        <button class="btn btn-neutral btn-outline">All</button>
+        <button class="btn btn-neutral btn-outline">Interview</button>
+        <button class="btn btn-neutral btn-outline">Rejected</button>
+    </div>
+
+    <div>
+        <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
+            <div>
+                <h3 class="font-medium text-lg">TechNova Ltd</h3>
+                <p>Frontend Developer</p>
+            </div>
+            <ul class="space-x-4">
+                <span>Dhaka</span>
+                <span>Full-time</span>
+                <span>40,000 BDT</span>
+            </ul>
+            <div>
+                <p class="bg-base-200 inline-block px-4 py-2">Not Applied</p>
+                <p>Build and maintain modern web applications.</p>
+
+            </div>
+            <ul class="space-x-4">
+                <button class="btn text-success">interview</button>
+                <button class="btn text-error">Rejected</button>
+            </ul>
+
+            <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
+        </section>
+    </div>
+</article>
+
+<article  class="max-w-7xl mx-auto py-30 px-4 md:px-0 space-y-4 bg-base-100 flex flex-col justify-center items-center rounded-2xl">
+    <img src="./jobs.png" alt="">
+    <p class="font-bold text-2xl">No jobs available</p>
+    <em class="font-stretch-75%">Check back soon for new job opportunities</em>
+</article>
+   <script src="scripts/jobData.js"></script>
 </body>
 </html>
