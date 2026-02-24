@@ -1,5 +1,10 @@
-const interviewList = [];
-const rejectedList = [];
+let interviewList = [];
+let rejectedList = [];
+
+let currentStatus = ''
+
+const jobsDataCatch = jobsDataGet()
+// console.log(jobsDataCatch)
 
 
 //get id to data count for call function getID() 
@@ -16,12 +21,13 @@ const rejectedCount = getId('rejected_count');
  const rejectedFilterBtn = getId('rejected_Filter_Btn')
 
 // all job container 
-const jobContainer = getId('job_card_container')
+const filterDivContainer = getId('filterDiv_container')
+const jobCardContainer = getId('job_card_container')
 
 // for counter calculation
 function calculation(){
     // set counter to data 
-    totalCount.innerText = jobContainer.children.length;
+    totalCount.innerText = jobCardContainer.children.length;
     interviewCount.innerText = interviewList.length;
     rejectedCount.innerText = rejectedList.length;
 
@@ -45,4 +51,204 @@ function toggleStyle(id){
     getId(id).classList.remove('bg-base-100', 'text-black')
     getId(id).classList.add('bg-black', 'text-amber-50')
 
+    currentStatus = id;
+
+    if(id == 'interview_Filter_Btn'){
+        jobCardContainer.classList.add('hidden')
+        filterDivContainer.classList.remove('hidden')
+        interviewRenderCart()
+
+    }else if(id == 'all_Filter_Btn'){
+        jobCardContainer.classList.remove('hidden')
+        filterDivContainer.classList.add('hidden')
+
+    }else if(id = 'rejected_Filter_Btn'){
+        jobCardContainer.classList.add('hidden')
+        filterDivContainer.classList.remove('hidden')
+        rejectedRenderCart()
+    }
+
+
 }
+
+// event delegation 
+jobCardContainer.addEventListener('click', function(e){
+    // console.log(e.target.classList.contains('interview_btn'))// true
+
+    if(e.target.classList.contains('interview_btn')){
+        const parentNode = e.target.parentNode.parentNode;
+        // console.log(parentNode)
+
+        // step-1: set status_title_btn 
+         parentNode.querySelector('.status_title_btn').classList.remove('border','border-error')
+         parentNode.querySelector('.status_title_btn').classList.add('border','border-success')
+
+         parentNode.querySelector('.status_title_btn').innerText = 'Interview';
+
+        // step-2: 
+        const companyName = parentNode.querySelector('.companyName').innerText
+        const position = parentNode.querySelector('.position').innerText
+        const location = parentNode.querySelector('.location').innerText
+        const type = parentNode.querySelector('.type').innerText
+        const salary = parentNode.querySelector('.salary').innerText
+        const description = parentNode.querySelector('.description').innerText
+        
+        parentNode.querySelector('.status_title_btn').innerText = 'Interview'
+        // console.log(companyName)
+
+        const jobCartInfo = {
+
+            companyName,
+            position,
+            location,
+            type,
+            salary,
+            description,
+            notApplied : 'Interview',
+
+        }
+        // console.log(jobCartInfo)
+
+        const companyNameExist = interviewList.find(items => items.companyName == jobCartInfo.companyName)
+        // console.log(companyNameExist)
+
+        if(!companyNameExist){
+            interviewList.push(jobCartInfo)
+        }
+        // removing company name from rejectList 
+        rejectedList = rejectedList.filter(item=> item.companyName != jobCartInfo.companyName)
+
+        calculation() 
+
+        if(currentStatus == 'rejected_Filter_Btn'){
+            rejectedRenderCart()
+        }
+
+        // interviewRenderCart()
+
+    }else if(e.target.classList.contains('rejected_btn')){
+        const parentNode = e.target.parentNode.parentNode;
+        
+        parentNode.querySelector('.status_title_btn').classList.add('border','border-error')
+        parentNode.querySelector('.status_title_btn').innerText = 'Rejected';
+
+          // step-2: 
+        const companyName = parentNode.querySelector('.companyName').innerText
+        const position = parentNode.querySelector('.position').innerText
+        const location = parentNode.querySelector('.location').innerText
+        const type = parentNode.querySelector('.type').innerText
+        const salary = parentNode.querySelector('.salary').innerText
+        const description = parentNode.querySelector('.description').innerText
+        
+        parentNode.querySelector('.status_title_btn').innerText = 'Rejected'
+        // console.log(companyName)
+
+        const jobCartInfo = {
+
+            companyName,
+            position,
+            location,
+            type,
+            salary,
+            description,
+               notApplied : 'Rejected',
+        }
+        // console.log(jobCartInfo)
+
+        const companyNameExist = rejectedList.find(items => items.companyName == jobCartInfo.companyName)
+        // console.log(companyNameExist)
+
+        if(!companyNameExist){
+            rejectedList.push(jobCartInfo)
+        }
+
+        // removing company name from rejectList 
+        interviewList = interviewList.filter(item => item.companyName != jobCartInfo.companyName)
+
+        calculation()
+
+        if(currentStatus == 'interview_Filter_Btn'){
+            interviewRenderCart()
+        }
+        // rejectedRenderCart()
+    }
+
+})
+
+
+function interviewRenderCart(){
+    filterDivContainer.innerHTML = ' '
+
+    for(let interview of interviewList){
+
+        const section = document.createElement('section');
+
+        section.innerHTML= `
+        <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
+                  <div>
+                      <h3 class="companyName font-medium text-lg"> ${interview.companyName}</h3>
+                      <p>${interview.position}</p>
+                  </div>
+                  <ul class="space-x-4">
+                      <span>${interview.location}</span>
+                      <span>${interview.type}</span>
+                      <span>${interview.salary}</span>
+                  </ul>
+                  <div>
+                      <p class="status_title_btn bg-base-300 inline-block px-4 py-2">${interview.notApplied}</p>
+                      <p>${interview.description}</p>
+      
+                  </div>
+                  <ul class="space-x-4">
+                      <button class="interview_btn btn text-success font-medium">Interview</button>
+                      <button class="rejected_btn btn text-error font-medium">Rejected</button>
+                  </ul>
+      
+                  <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
+              </section>
+    
+    
+    `
+     filterDivContainer.appendChild(section);
+    }
+}
+
+function rejectedRenderCart(){
+    filterDivContainer.innerHTML = ' '
+
+    for(let rejected of rejectedList){
+
+        const section = document.createElement('section');
+
+        section.innerHTML= `
+        <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
+                  <div>
+                      <h3 class="companyName font-medium text-lg"> ${rejected.companyName}</h3>
+                      <p>${rejected.position}</p>
+                  </div>
+                  <ul class="space-x-4">
+                      <span>${rejected.location}</span>
+                      <span>${rejected.type}</span>
+                      <span>${rejected.salary}</span>
+                  </ul>
+                  <div>
+                      <p class="status_title_btn bg-base-300 inline-block px-4 py-2">${rejected.notApplied}</p>
+                      <p>${rejected.description}</p>
+      
+                  </div>
+                  <ul class="space-x-4">
+                      <button class="interview_btn btn text-success font-medium">Interview</button>
+                      <button class="rejected_btn btn text-error font-medium">Rejected</button>
+                  </ul>
+      
+                  <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
+              </section>
+    
+    
+    `
+     filterDivContainer.appendChild(section);
+    }
+}
+
+const interviewShow = interviewRenderCart()
+// console.log(interviewShow)

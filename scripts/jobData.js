@@ -73,6 +73,10 @@ const jobs = [
   }
 ];
 
+function jobsDataGet(){
+  return jobs
+}
+
 
 function getData(){
   
@@ -88,22 +92,22 @@ function getData(){
     section.innerHTML= `
     <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
                   <div>
-                      <h3 class="font-medium text-lg"> ${job.companyName}</h3>
-                      <p>${job.position}</p>
+                      <h3 class="companyName font-medium text-lg"> ${job.companyName}</h3>
+                      <p class="position">${job.position}</p>
                   </div>
                   <ul class="space-x-4">
-                      <span>${job.location}</span>
-                      <span>${job.type}</span>
-                      <span>${job.salary}</span>
+                      <span class="location">${job.location}</span>
+                      <span class="type">${job.type}</span>
+                      <span class="salary">${job.salary}</span>
                   </ul>
                   <div>
-                      <p class="bg-base-300 inline-block px-4 py-2">Not Applied</p>
-                      <p>${job.description}</p>
+                      <p class="status_title_btn bg-base-300 inline-block px-4 py-2">Not Applied</p>
+                      <p class="description">${job.description}</p>
       
                   </div>
                   <ul class="space-x-4">
-                      <button class="btn text-success font-medium">Interview</button>
-                      <button class="btn text-error font-medium">Rejected</button>
+                      <button class="interview_btn btn text-success font-medium">Interview</button>
+                      <button class="rejected_btn btn text-error font-medium">Rejected</button>
                   </ul>
       
                   <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>

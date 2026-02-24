@@ -39,7 +39,7 @@
       <article class="max-w-7xl mx-auto py-6 px-4 md:px-0 space-y-4 ">
           <h2 class="font-medium text-xl">Available Jobs</h2>
 
-          <!-- All, Interview, Rejected job list  -->
+          <!-- All, Interview, Rejected job list button -->
           <div class="space-x-3">
               <button onclick="toggleStyle('all_Filter_Btn')" id="all_Filter_Btn" class="btn btn-outline bg-black text-amber-50">All</button>
 
@@ -48,13 +48,18 @@
               <button onclick="toggleStyle('rejected_Filter_Btn')"  id="rejected_Filter_Btn" class="btn btn-outline bg-base-100">Rejected</button>
           </div>
 
+          <!-- filterDiv div constainer  -->
+           <div id="filterDiv_container" class="hidden space-y-4">
+
+           </div>
       
           <!-- jobs card container  -->
           <div id="job_card_container" class="space-y-4">
 
+
               <!-- <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
                   <div>
-                      <h3 class="font-medium text-lg">TechNova Ltd</h3>
+                      <h3 class="companyName font-medium text-lg">TechNova Ltd</h3>
                       <p>Frontend Developer</p>
                   </div>
                   <ul class="space-x-4">
@@ -63,13 +68,13 @@
                       <span>40,000 BDT</span>
                   </ul>
                   <div>
-                      <p class="bg-base-200 inline-block px-4 py-2">Not Applied</p>
+                      <p class="status_title_btn bg-base-200 font-bold inline-block px-4 py-2">Not Applied</p>
                       <p>Build and maintain modern web applications.</p>
       
                   </div>
                   <ul class="space-x-4">
-                      <button class="btn text-success">interview</button>
-                      <button class="btn text-error">Rejected</button>
+                      <button class="interview_btn btn text-success">interview</button>
+                      <button class="rejected_btn btn text-error">Rejected</button>
                   </ul>
       
                   <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
