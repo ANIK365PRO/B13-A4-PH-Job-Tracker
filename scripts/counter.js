@@ -24,6 +24,8 @@ const jobCardContainer = getId('job_card_container')
 const mainContainer = getId('mainContainer')
 const filterDivContainer = getId('filterDiv_container')
 
+const statusTitleBtn = getId('status_title_btn')
+
 // for counter calculation
 function calculation(){
     // set counter to data 
@@ -58,20 +60,23 @@ function toggleStyle(id){
     if(id == 'interview_Filter_Btn'){
         jobCardContainer.classList.add('hidden')
         filterDivContainer.classList.remove('hidden')
+         totalArticleJobCount.innerText = interviewList.length;
         interviewRenderCart()
        
     }else if(id == 'all_Filter_Btn'){
         jobCardContainer.classList.remove('hidden')
         filterDivContainer.classList.add('hidden')
+        totalArticleJobCount.innerText = jobCardContainer.children.length
 
     }else if(id = 'rejected_Filter_Btn'){
         jobCardContainer.classList.add('hidden')
         filterDivContainer.classList.remove('hidden')
+         totalArticleJobCount.innerText = rejectedList.length;
         rejectedRenderCart()
        
     }   
     
-    
+    calculation()
 }
 
 
@@ -86,7 +91,7 @@ mainContainer.addEventListener('click', function(e){
         // step-1: set status_title_btn 
          parentNode.querySelector('.status_title_btn').classList.remove('border','border-error')
          parentNode.querySelector('.status_title_btn').classList.add('border','border-success')
-         parentNode.querySelector('.status_title_btn').innerText = 'Interview';
+        //  parentNode.querySelector('.status_title_btn').innerText = 'Interview';
 
         // step-2: 
         const companyName = parentNode.querySelector('.companyName').innerText
@@ -131,16 +136,22 @@ mainContainer.addEventListener('click', function(e){
             rejectedRenderCart()
             // interviewRenderCart()
         }
+
+         
+        if(currentStatus == 'delete_btn'){
+            interviewRenderCart()
+            rejectedRenderCart()
+        }
         calculation() 
 
 
-    }else if(e.target.classList.contains('rejected_btn')){
+    }if(e.target.classList.contains('rejected_btn')){
         const parentNode = e.target.parentNode.parentNode;
         console.log(parentNode)
         
         parentNode.querySelector('.status_title_btn').classList.remove('border','border-success')
         parentNode.querySelector('.status_title_btn').classList.add('border','border-error')
-        parentNode.querySelector('.status_title_btn').innerText = 'Rejected';
+        // parentNode.querySelector('.status_title_btn').innerText = 'Rejected';
         
           // step-2: 
         const companyName = parentNode.querySelector('.companyName').innerText
@@ -185,6 +196,26 @@ mainContainer.addEventListener('click', function(e){
             interviewRenderCart()
             // rejectedRenderCart()
         }
+
+         
+        if(currentStatus == 'delete_btn'){
+            interviewRenderCart()
+            rejectedRenderCart()
+        }
+        calculation()
+    }else if(e.target.classList.contains('delete_btn')){
+         const parentNode = e.target.parentNode.parentNode.parentNode;
+         const childNode = e.target.parentNode.parentNode
+         
+         console.log(parentNode)
+         console.log(childNode)
+        parentNode.removeChild(childNode)
+
+        
+        if(currentStatus == 'delete_btn'){
+            interviewRenderCart()
+            rejectedRenderCart()
+        }
         calculation()
     }
 
@@ -198,32 +229,6 @@ function interviewRenderCart(){
 
         const section = document.createElement('section');
 
-    //     section.innerHTML= `
-    //     <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
-    //               <div>
-    //                   <h3 class="companyName font-medium text-lg"> ${interview.companyName}</h3>
-    //                   <p class="position">${interview.position}</p>
-    //               </div>
-    //               <ul class="space-x-4">
-    //                   <span>${interview.location}</span>
-    //                   <span>${interview.type}</span>
-    //                   <span>${interview.salary}</span>
-    //               </ul>
-    //               <div>
-    //                   <p class="status_title_btn bg-base-300 inline-block px-4 py-2">${interview.status}</p>
-    //                   <p>${interview.description}</p>
-      
-    //               </div>
-    //               <ul class="space-x-4">
-    //                   <button class="interview_btn btn text-success font-medium">Interview</button>
-    //                   <button class="rejected_btn btn text-error font-medium">Rejected</button>
-    //               </ul>
-      
-    //               <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
-    //           </section>
-    
-    
-    // `
 
      section.innerHTML= `
     <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
@@ -246,7 +251,7 @@ function interviewRenderCart(){
                       <button class="rejected_btn btn text-error font-medium">Rejected</button>
                   </ul>
       
-                  <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
+                  <button class="delete_btn btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
               </section>
     
     
@@ -262,32 +267,7 @@ function rejectedRenderCart(){
 
         const section = document.createElement('section');
 
-    //     section.innerHTML= `
-    //     <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
-    //               <div>
-    //                   <h3 class="companyName font-medium text-lg"> ${rejected.companyName}</h3>
-    //                   <p class="position">${rejected.position}</p>
-    //               </div>
-    //               <ul class="space-x-4">
-    //                   <span>${rejected.location}</span>
-    //                   <span>${rejected.type}</span>
-    //                   <span>${rejected.salary}</span>
-    //               </ul>
-    //               <div>
-    //                   <p class="status_title_btn bg-base-300 inline-block px-4 py-2">${rejected.status}</p>
-    //                   <p>${rejected.description}</p>
-      
-    //               </div>
-    //               <ul class="space-x-4">
-    //                   <button class="interview_btn btn text-success font-medium">Interview</button>
-    //                   <button class="rejected_btn btn text-error font-medium">Rejected</button>
-    //               </ul>
-      
-    //               <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
-    //           </section>
-    
-    
-    // `
+
          section.innerHTML= `
     <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
                   <div>
@@ -309,7 +289,7 @@ function rejectedRenderCart(){
                       <button class="rejected_btn btn text-error font-medium">Rejected</button>
                   </ul>
       
-                  <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
+                  <button class="delete_btn btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
               </section>
     
     
@@ -319,8 +299,7 @@ function rejectedRenderCart(){
     }
 }
 
-// const interviewShow = interviewRenderCart()
-// console.log(interviewShow)
+
 
 
 

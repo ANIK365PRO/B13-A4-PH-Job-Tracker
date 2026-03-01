@@ -110,7 +110,7 @@ function getData(){
                       <button class="rejected_btn btn text-error font-medium">Rejected</button>
                   </ul>
       
-                  <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
+                  <button class="delete_btn btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
               </section>
     
     
