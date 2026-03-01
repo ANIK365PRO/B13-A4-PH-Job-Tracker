@@ -6,7 +6,7 @@ const jobs = [
     type: "Full-time",
     salary: "40000",
     description: "Build and maintain modern web applications.",
-    notApplied: true
+    status: "Not Applied"
   },
   {
     companyName: "CodeCrafters",
@@ -15,7 +15,7 @@ const jobs = [
     type: "Remote",
     salary: "50000",
     description: "Develop APIs and manage databases.",
-    notApplied: true
+    status: "Not Applied"
   },
   {
     companyName: "SoftSolutions",
@@ -24,7 +24,7 @@ const jobs = [
     type: "Contract",
     salary: "35000",
     description: "Design user-friendly interfaces.",
-    notApplied: true
+    status: "Not Applied"
   },
   {
     companyName: "NextGen IT",
@@ -33,7 +33,7 @@ const jobs = [
     type: "Full-time",
     salary: "60000",
     description: "Work on full stack JavaScript projects.",
-    notApplied: true
+    status:"Not Applied"
   },
   {
     companyName: "DigitalWave",
@@ -42,7 +42,7 @@ const jobs = [
     type: "Part-time",
     salary: "30000",
     description: "Test and ensure software quality.",
-    notApplied: true
+    status: "Not Applied"
   },
   {
     companyName: "InnoTech",
@@ -51,7 +51,7 @@ const jobs = [
     type: "Full-time",
     salary: "70000",
     description: "Manage CI/CD pipelines and cloud services.",
-    notApplied: true
+    status: "Not Applied"
   },
   {
     companyName: "WebMatrix",
@@ -60,7 +60,7 @@ const jobs = [
     type: "Remote",
     salary: "45000",
     description: "Develop interactive React applications.",
-    notApplied: true
+    status: "Not Applied"
   },
   {
     companyName: "SkyNet Systems",
@@ -69,13 +69,13 @@ const jobs = [
     type: "Full-time",
     salary: "80000",
     description: "Monitor and secure network infrastructure.",
-    notApplied: true
+    status: "Not Applied"
   }
 ];
 
-function jobsDataGet(){
-  return jobs
-}
+// function jobsDataGet(){
+//   return jobs
+// }
 
 
 function getData(){
@@ -101,7 +101,7 @@ function getData(){
                       <span class="salary">${job.salary}</span>
                   </ul>
                   <div>
-                      <p class="status_title_btn bg-base-300 inline-block px-4 py-2">Not Applied</p>
+                      <p class="status_title_btn bg-base-300 inline-block px-4 py-2">${job.status}</p>
                       <p class="description">${job.description}</p>
       
                   </div>
@@ -120,5 +120,5 @@ function getData(){
   }
 }
 
-const result = getData();
+ getData();
 // console.log(result)

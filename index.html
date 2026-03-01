@@ -34,10 +34,14 @@
 
    </header>
 
-   <main>
+   <main id="mainContainer">
        <!-- Available jobs article section  -->
       <article class="max-w-7xl mx-auto py-6 px-4 md:px-0 space-y-4 ">
-          <h2 class="font-medium text-xl">Available Jobs</h2>
+          <div class="flex justify-between items-center">
+            <h2 class="font-medium text-xl">Available Jobs</h2>
+            <p><span id="total_article_job_count">0</span> Jobs</p>
+          </div>
+
 
           <!-- All, Interview, Rejected job list button -->
           <div class="space-x-3">
@@ -48,12 +52,7 @@
               <button onclick="toggleStyle('rejected_Filter_Btn')"  id="rejected_Filter_Btn" class="btn btn-outline bg-base-100">Rejected</button>
           </div>
 
-          <!-- filterDiv div constainer  -->
-           <div id="filterDiv_container" class="hidden space-y-4">
-
-           </div>
-      
-          <!-- jobs card container  -->
+            <!-- jobs card container  -->
           <div id="job_card_container" class="space-y-4">
 
 
@@ -80,6 +79,11 @@
                   <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
               </section> -->
           </div>
+
+          <!-- filterDiv div constainer  -->
+           <div id="filterDiv_container" class="hidden space-y-4">
+
+           </div>
       </article>
 
       <!-- when job data no found  -->

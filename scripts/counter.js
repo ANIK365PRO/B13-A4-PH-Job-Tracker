@@ -1,9 +1,9 @@
 let interviewList = [];
 let rejectedList = [];
 
-let currentStatus = ''
+let currentStatus = 'all'
 
-const jobsDataCatch = jobsDataGet()
+// const jobsDataCatch = jobsDataGet()
 // console.log(jobsDataCatch)
 
 
@@ -11,8 +11,7 @@ const jobsDataCatch = jobsDataGet()
 const totalCount =getId('total_count');
 const interviewCount = getId('interview_count');
 const rejectedCount = getId('rejected_count');
-// console.log(typeof totalCount)
-// console.log(totalCount.innerText)
+const  totalArticleJobCount = getId('total_article_job_count')
 // console.log(totalCount, interviewCount, rejectedCount)
 
 //get id to data filter for call function getID() 
@@ -21,8 +20,9 @@ const rejectedCount = getId('rejected_count');
  const rejectedFilterBtn = getId('rejected_Filter_Btn')
 
 // all job container 
-const filterDivContainer = getId('filterDiv_container')
 const jobCardContainer = getId('job_card_container')
+const mainContainer = getId('mainContainer')
+const filterDivContainer = getId('filterDiv_container')
 
 // for counter calculation
 function calculation(){
@@ -31,6 +31,7 @@ function calculation(){
     interviewCount.innerText = interviewList.length;
     rejectedCount.innerText = rejectedList.length;
 
+    // totalArticleJobCount.innerText = jobCardContainer.children.length
 }
 
 calculation()
@@ -52,12 +53,13 @@ function toggleStyle(id){
     getId(id).classList.add('bg-black', 'text-amber-50')
 
     currentStatus = id;
+    console.log(currentStatus)
 
     if(id == 'interview_Filter_Btn'){
         jobCardContainer.classList.add('hidden')
         filterDivContainer.classList.remove('hidden')
         interviewRenderCart()
-
+       
     }else if(id == 'all_Filter_Btn'){
         jobCardContainer.classList.remove('hidden')
         filterDivContainer.classList.add('hidden')
@@ -66,35 +68,39 @@ function toggleStyle(id){
         jobCardContainer.classList.add('hidden')
         filterDivContainer.classList.remove('hidden')
         rejectedRenderCart()
-    }
-
-
+       
+    }   
+    
+    
 }
 
+
 // event delegation 
-jobCardContainer.addEventListener('click', function(e){
+mainContainer.addEventListener('click', function(e){
     // console.log(e.target.classList.contains('interview_btn'))// true
 
     if(e.target.classList.contains('interview_btn')){
         const parentNode = e.target.parentNode.parentNode;
-        // console.log(parentNode)
+        console.log(parentNode)
 
         // step-1: set status_title_btn 
          parentNode.querySelector('.status_title_btn').classList.remove('border','border-error')
          parentNode.querySelector('.status_title_btn').classList.add('border','border-success')
-
          parentNode.querySelector('.status_title_btn').innerText = 'Interview';
 
         // step-2: 
         const companyName = parentNode.querySelector('.companyName').innerText
         const position = parentNode.querySelector('.position').innerText
+        console.log(position)
         const location = parentNode.querySelector('.location').innerText
         const type = parentNode.querySelector('.type').innerText
         const salary = parentNode.querySelector('.salary').innerText
         const description = parentNode.querySelector('.description').innerText
+        const status = parentNode.querySelector('.status_title_btn').innerText;
         
         parentNode.querySelector('.status_title_btn').innerText = 'Interview'
-        // console.log(companyName)
+        console.log(companyName)
+          console.log(position)
 
         const jobCartInfo = {
 
@@ -104,34 +110,38 @@ jobCardContainer.addEventListener('click', function(e){
             type,
             salary,
             description,
-            notApplied : 'Interview',
+            status : 'Interview',
 
         }
         // console.log(jobCartInfo)
 
         const companyNameExist = interviewList.find(items => items.companyName == jobCartInfo.companyName)
-        // console.log(companyNameExist)
+        console.log(companyNameExist)
 
         if(!companyNameExist){
             interviewList.push(jobCartInfo)
         }
+
         // removing company name from rejectList 
         rejectedList = rejectedList.filter(item=> item.companyName != jobCartInfo.companyName)
+        console.log(rejectedList)
 
-        calculation() 
-
+        
         if(currentStatus == 'rejected_Filter_Btn'){
             rejectedRenderCart()
+            // interviewRenderCart()
         }
+        calculation() 
 
-        // interviewRenderCart()
 
     }else if(e.target.classList.contains('rejected_btn')){
         const parentNode = e.target.parentNode.parentNode;
+        console.log(parentNode)
         
+        parentNode.querySelector('.status_title_btn').classList.remove('border','border-success')
         parentNode.querySelector('.status_title_btn').classList.add('border','border-error')
         parentNode.querySelector('.status_title_btn').innerText = 'Rejected';
-
+        
           // step-2: 
         const companyName = parentNode.querySelector('.companyName').innerText
         const position = parentNode.querySelector('.position').innerText
@@ -139,10 +149,13 @@ jobCardContainer.addEventListener('click', function(e){
         const type = parentNode.querySelector('.type').innerText
         const salary = parentNode.querySelector('.salary').innerText
         const description = parentNode.querySelector('.description').innerText
+        const status = parentNode.querySelector('.status_title_btn').innerText;
         
         parentNode.querySelector('.status_title_btn').innerText = 'Rejected'
-        // console.log(companyName)
+        console.log(companyName)
+        console.log(position)
 
+        
         const jobCartInfo = {
 
             companyName,
@@ -151,52 +164,81 @@ jobCardContainer.addEventListener('click', function(e){
             type,
             salary,
             description,
-               notApplied : 'Rejected',
+            status : 'Rejected',
+
         }
         // console.log(jobCartInfo)
 
         const companyNameExist = rejectedList.find(items => items.companyName == jobCartInfo.companyName)
-        // console.log(companyNameExist)
+        console.log(companyNameExist)
 
         if(!companyNameExist){
             rejectedList.push(jobCartInfo)
         }
 
         // removing company name from rejectList 
+        
         interviewList = interviewList.filter(item => item.companyName != jobCartInfo.companyName)
 
-        calculation()
-
+        
         if(currentStatus == 'interview_Filter_Btn'){
             interviewRenderCart()
+            // rejectedRenderCart()
         }
-        // rejectedRenderCart()
+        calculation()
     }
 
 })
 
 
 function interviewRenderCart(){
-    filterDivContainer.innerHTML = ' '
+    filterDivContainer.innerHTML = ''
 
     for(let interview of interviewList){
 
         const section = document.createElement('section');
 
-        section.innerHTML= `
-        <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
+    //     section.innerHTML= `
+    //     <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
+    //               <div>
+    //                   <h3 class="companyName font-medium text-lg"> ${interview.companyName}</h3>
+    //                   <p class="position">${interview.position}</p>
+    //               </div>
+    //               <ul class="space-x-4">
+    //                   <span>${interview.location}</span>
+    //                   <span>${interview.type}</span>
+    //                   <span>${interview.salary}</span>
+    //               </ul>
+    //               <div>
+    //                   <p class="status_title_btn bg-base-300 inline-block px-4 py-2">${interview.status}</p>
+    //                   <p>${interview.description}</p>
+      
+    //               </div>
+    //               <ul class="space-x-4">
+    //                   <button class="interview_btn btn text-success font-medium">Interview</button>
+    //                   <button class="rejected_btn btn text-error font-medium">Rejected</button>
+    //               </ul>
+      
+    //               <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
+    //           </section>
+    
+    
+    // `
+
+     section.innerHTML= `
+    <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
                   <div>
                       <h3 class="companyName font-medium text-lg"> ${interview.companyName}</h3>
-                      <p>${interview.position}</p>
+                      <p class="position">${interview.position}</p>
                   </div>
                   <ul class="space-x-4">
-                      <span>${interview.location}</span>
-                      <span>${interview.type}</span>
-                      <span>${interview.salary}</span>
+                      <span class="location">${interview.location}</span>
+                      <span class="type">${interview.type}</span>
+                      <span class="salary">${interview.salary}</span>
                   </ul>
                   <div>
-                      <p class="status_title_btn bg-base-300 inline-block px-4 py-2">${interview.notApplied}</p>
-                      <p>${interview.description}</p>
+                      <p class="status_title_btn bg-base-300 inline-block px-4 py-2">${interview.status}</p>
+                      <p class="description">${interview.description}</p>
       
                   </div>
                   <ul class="space-x-4">
@@ -214,26 +256,52 @@ function interviewRenderCart(){
 }
 
 function rejectedRenderCart(){
-    filterDivContainer.innerHTML = ' '
+    filterDivContainer.innerHTML = ''
 
     for(let rejected of rejectedList){
 
         const section = document.createElement('section');
 
-        section.innerHTML= `
-        <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
+    //     section.innerHTML= `
+    //     <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
+    //               <div>
+    //                   <h3 class="companyName font-medium text-lg"> ${rejected.companyName}</h3>
+    //                   <p class="position">${rejected.position}</p>
+    //               </div>
+    //               <ul class="space-x-4">
+    //                   <span>${rejected.location}</span>
+    //                   <span>${rejected.type}</span>
+    //                   <span>${rejected.salary}</span>
+    //               </ul>
+    //               <div>
+    //                   <p class="status_title_btn bg-base-300 inline-block px-4 py-2">${rejected.status}</p>
+    //                   <p>${rejected.description}</p>
+      
+    //               </div>
+    //               <ul class="space-x-4">
+    //                   <button class="interview_btn btn text-success font-medium">Interview</button>
+    //                   <button class="rejected_btn btn text-error font-medium">Rejected</button>
+    //               </ul>
+      
+    //               <button class="btn absolute top-6 md:top-10 right-6 md:right-20">X</button>
+    //           </section>
+    
+    
+    // `
+         section.innerHTML= `
+    <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
                   <div>
                       <h3 class="companyName font-medium text-lg"> ${rejected.companyName}</h3>
-                      <p>${rejected.position}</p>
+                      <p class="position">${rejected.position}</p>
                   </div>
                   <ul class="space-x-4">
-                      <span>${rejected.location}</span>
-                      <span>${rejected.type}</span>
-                      <span>${rejected.salary}</span>
+                      <span class="location">${rejected.location}</span>
+                      <span class="type">${rejected.type}</span>
+                      <span class="salary">${rejected.salary}</span>
                   </ul>
                   <div>
-                      <p class="status_title_btn bg-base-300 inline-block px-4 py-2">${rejected.notApplied}</p>
-                      <p>${rejected.description}</p>
+                      <p class="status_title_btn bg-base-300 inline-block px-4 py-2">${rejected.status}</p>
+                      <p class="description">${rejected.description}</p>
       
                   </div>
                   <ul class="space-x-4">
@@ -246,9 +314,15 @@ function rejectedRenderCart(){
     
     
     `
+
      filterDivContainer.appendChild(section);
     }
 }
 
-const interviewShow = interviewRenderCart()
+// const interviewShow = interviewRenderCart()
 // console.log(interviewShow)
+
+
+
+
+
