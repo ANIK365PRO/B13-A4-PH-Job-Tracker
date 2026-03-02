@@ -26,6 +26,8 @@ const filterDivContainer = getId('filterDiv_container')
 
 const statusTitleBtn = getId('status_title_btn')
 
+const noDataAvailable = getId('no_data_found_section')
+
 // for counter calculation
 function calculation(){
     // set counter to data 
@@ -33,6 +35,12 @@ function calculation(){
     interviewCount.innerText = interviewList.length;
     rejectedCount.innerText = rejectedList.length;
 
+    // for show or hide no jobs card
+    if(totalCount.innerText < 1 ){
+        noDataAvailable.classList.remove('hidden')
+    }else{
+        noDataAvailable.classList.add('hidden')
+    }
 }
 
 calculation()
@@ -59,10 +67,11 @@ function toggleStyle(id){
     if(id == 'interview_Filter_Btn'){
         jobCardContainer.classList.add('hidden')
         filterDivContainer.classList.remove('hidden')
-         totalArticleJobCount.innerText = interviewList.length;
+        totalArticleJobCount.innerText = interviewList.length;
+
         interviewRenderCart()
        
-    }else if(id == 'all_Filter_Btn'){
+    }if(id == 'all_Filter_Btn'){
         jobCardContainer.classList.remove('hidden')
         filterDivContainer.classList.add('hidden')
         totalArticleJobCount.innerText = jobCardContainer.children.length
@@ -71,10 +80,11 @@ function toggleStyle(id){
         jobCardContainer.classList.add('hidden')
         filterDivContainer.classList.remove('hidden')
          totalArticleJobCount.innerText = rejectedList.length;
+
         rejectedRenderCart()
        
-    }   
-    
+    }  
+     
     calculation()
 }
 
@@ -120,7 +130,7 @@ mainContainer.addEventListener('click', function(e){
         // console.log(jobCartInfo)
 
         const companyNameExist = interviewList.find(items => items.companyName == jobCartInfo.companyName)
-        console.log(companyNameExist)
+        // console.log(companyNameExist)
 
         if(!companyNameExist){
             interviewList.push(jobCartInfo)
@@ -133,7 +143,7 @@ mainContainer.addEventListener('click', function(e){
         
         if(currentStatus == 'rejected_Filter_Btn'){
             rejectedRenderCart()
-            // interviewRenderCart()
+            interviewRenderCart()
         }
 
          
@@ -141,7 +151,9 @@ mainContainer.addEventListener('click', function(e){
             interviewRenderCart()
             rejectedRenderCart()
         }
+
         calculation() 
+        interviewRenderCart()
 
 
     }if(e.target.classList.contains('rejected_btn')){
@@ -224,7 +236,8 @@ mainContainer.addEventListener('click', function(e){
 
 function interviewRenderCart(){
     filterDivContainer.innerHTML = ''
-
+    console.log('1111111111111')
+    console.log(interviewList)
     for(let interview of interviewList){
 
         const section = document.createElement('section');
@@ -302,6 +315,16 @@ function rejectedRenderCart(){
 
  totalArticleJobCount.innerText = jobCardContainer.children.length
 
+//  function available(){
+
+//      if( interviewCount.innerText < 1 || rejectedCount.innerText  < 1){
+//                 noDataAvailable.classList.remove('hidden')
+//     }else{
+//                 noDataAvailable.classList.add('hidden')
+//     }
+
+//     console.log('available clicked !!!!!!!')
+//  }
 
 
 
