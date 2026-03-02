@@ -33,7 +33,6 @@ function calculation(){
     interviewCount.innerText = interviewList.length;
     rejectedCount.innerText = rejectedList.length;
 
-    // totalArticleJobCount.innerText = jobCardContainer.children.length
 }
 
 calculation()
@@ -210,9 +209,10 @@ mainContainer.addEventListener('click', function(e){
          console.log(parentNode)
          console.log(childNode)
         parentNode.removeChild(childNode)
-
+        totalArticleJobCount.innerText = jobCardContainer.children.length
         
         if(currentStatus == 'delete_btn'){
+           
             interviewRenderCart()
             rejectedRenderCart()
         }
@@ -260,6 +260,7 @@ function interviewRenderCart(){
     }
 }
 
+
 function rejectedRenderCart(){
     filterDivContainer.innerHTML = ''
 
@@ -299,8 +300,7 @@ function rejectedRenderCart(){
     }
 }
 
-
-
+ totalArticleJobCount.innerText = jobCardContainer.children.length
 
 
 
