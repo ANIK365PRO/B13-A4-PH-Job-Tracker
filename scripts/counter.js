@@ -24,9 +24,12 @@ const mainContainer = getId("mainContainer");
 const filterDivContainer = getId("filterDiv_container");
 
 const statusTitleBtn = document.querySelectorAll(".status_title_btn");
-console.log(statusTitleBtn)
+// console.log(statusTitleBtn)
 
-const noDataAvailable = getId("no_data_found_section");
+const noDataAll = getId("no_data_all_section");
+const noDataInterview = getId("no_data_interview_section");
+const noDataRejected = getId("no_data_rejected_section");
+console.log(noDataAll)
 
 // for counter calculation
 function calculation() {
@@ -35,20 +38,14 @@ function calculation() {
   interviewCount.innerText = interviewList.length;
   rejectedCount.innerText = rejectedList.length;
 
-  // for show or hide no jobs card
-  if (totalCount.innerText < 1) {
-
-    noDataAvailable.classList.remove("hidden");
-  }else if( interviewList.length < 1 ){
-
-        noDataAvailable.classList.remove('hidden')
-        
-  }else if(rejectedList.length  < 1){
-
-        noDataAvailable.classList.remove('hidden')
+  // for show or hide no jobs card for all toggle btn
+  if (totalCount.innerText == '0') {
+    noDataAll.classList.remove("hidden");
 
   }else {
-    noDataAvailable.classList.add("hidden");
+    noDataAll.classList.add("hidden");
+    noDataInterview.classList.add("hidden")
+    noDataRejected.classList.add("hidden")
   }
 
 }
@@ -78,6 +75,7 @@ function toggleStyle(id) {
     jobCardContainer.classList.add("hidden");
     filterDivContainer.classList.remove("hidden");
     totalArticleJobCount.innerText = interviewList.length;
+
     interviewRenderCart();
   } else if (id == "all_Filter_Btn") {
     jobCardContainer.classList.remove("hidden");
@@ -88,10 +86,25 @@ function toggleStyle(id) {
     jobCardContainer.classList.add("hidden");
     filterDivContainer.classList.remove("hidden");
     totalArticleJobCount.innerText = rejectedList.length;
+    
     rejectedRenderCart();
   }
 
   calculation();
+
+   // for show or hide no jobs card for interview and rejected toggle btn
+  if (id == "interview_Filter_Btn") {
+    noDataAll.classList.add("hidden");
+
+    interviewList.length < 1 ?  noDataInterview.classList.remove("hidden") : noDataInterview.classList.add("hidden")
+
+  }else if(id =="rejected_Filter_Btn"){
+    noDataAll.classList.add("hidden");
+
+    rejectedList.length < 1 ?  noDataRejected.classList.remove("hidden") : noDataRejected.classList.add("hidden")
+
+  }
+
 }
 
 // event delegation

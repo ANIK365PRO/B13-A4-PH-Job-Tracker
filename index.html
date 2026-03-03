@@ -55,7 +55,6 @@
             <!-- jobs card container  -->
           <div id="job_card_container" class="space-y-4">
 
-
               <!-- <section class="bg-base-100 p-6 md:p-10 space-y-4 rounded-2xl relative">
                   <div>
                       <h3 class="companyName font-medium text-lg">TechNova Ltd</h3>
@@ -80,18 +79,35 @@
               </section> -->
           </div>
 
-          <!-- filterDiv div constainer  -->
+          <!-- filterDiv div container  -->
            <div id="filterDiv_container" class="hidden space-y-4">
 
            </div>
-      </article>
 
-      <!-- when job data no found  -->
-      <article id="no_data_found_section"  class="hidden max-w-7xl mx-auto py-30 px-4 md:px-0 space-y-4 bg-base-100 flex flex-col justify-center items-center rounded-2xl">
-          <img src="./jobs.png" alt="">
-          <p class="font-bold text-2xl">No jobs available</p>
-          <em class="font-stretch-75%">Check back soon for new job opportunities</em>
-      </article>
+
+           <!-- when job data no found  -->
+           <section  class="max-w-7xl mx-auto py-6 px-4 md:px-0 space-y-4">
+                <div id="no_data_all_section"  class="hidden py-30 px-4 md:px-0 space-y-4 bg-base-100 flex flex-col justify-center items-center rounded-2xl">
+                    <img src="./jobs.png" alt="">
+                    <p class="font-bold text-2xl">No jobs available</p>
+                    <em class="font-stretch-75%">Check back soon for new job opportunities</em>
+                </div>
+      
+                  <div id="no_data_interview_section"  class="hidden py-30 px-4 md:px-0 space-y-4 bg-base-100 flex flex-col justify-center items-center rounded-2xl">
+                    <img src="./jobs.png" alt="">
+                    <p class="font-bold text-2xl">No Interview jobs available</p>
+                    <em class="font-stretch-75%">Check back soon for new job opportunities</em>
+                </div>
+                <div id="no_data_rejected_section"  class="hidden py-30 px-4 md:px-0 space-y-4 bg-base-100 flex flex-col justify-center items-center rounded-2xl">
+                    <img src="./jobs.png" alt="">
+                    <p class="font-bold text-2xl">No Rejected jobs available</p>
+                    <em class="font-stretch-75%">Check back soon for new job opportunities</em>
+                </div>
+               
+           </section>
+     </article>
+
+
    </main>
 
 
